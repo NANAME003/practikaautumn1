@@ -2,8 +2,9 @@ import ProductCounter from "./ProductCounter.jsx";
 
 function HeroMedia({ image, productCount }) {
   return (
-    <div>
-      <img src={image} alt="Покупатель с товарами " />
+    <div className="relative">
+      <img src={image} alt="Покупатель с товарами"
+      className="h-[380px] w-full rounded-2xl object-cover" />
 
       <ProductCounter count={productCount} />
     </div>

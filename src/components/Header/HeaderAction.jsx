@@ -4,7 +4,7 @@ import Search from "./Search.jsx";
 
 function HeaderActions() {
   return (
-    <div>
+    <div className="flex items-center gap-4">
       <Search />
 
       <AccountAction />

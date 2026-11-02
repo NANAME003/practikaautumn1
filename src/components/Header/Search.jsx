@@ -3,6 +3,17 @@ function Search() {
         <input
         type="search"
         placeholder=" Поиск товаров"
+        className="w-64 
+        rounded-lg
+        border
+        border-gray-200
+        bg-white px-4
+        py-2
+        text-sm
+        text-gray-800
+        outline-none
+        placeholder:text-gray-400
+        focus:border-gray-400"
        />
     );
 }
