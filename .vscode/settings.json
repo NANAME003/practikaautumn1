@@ -1,0 +1,6 @@
+{
+    "terminal.integrated.env.windows": {
+        "Path": "D:\\Netrogat\\node-v18.14.0-win-x64;${env:Path}",
+        "NODE_SKIP_PLATFORM_CHECK": "1"
+    }
+}
