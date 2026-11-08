@@ -21,7 +21,7 @@ function PopularItems(){
 
     return(
         <>
-       <section className="bg-stone-50">
+       <section className="bg-white">
             <div className="mx-auto max-w-6xl px-6 py-12">
                 <div className="flex items-end justify-between">
                     <div>

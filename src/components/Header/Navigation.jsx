@@ -4,7 +4,7 @@ function Navigation() {
   const navigationItems = [
     {
       label: "Главная",
-      patch: "/",
+      path: "/",
     },
     {
       label: "Товары",
@@ -13,7 +13,7 @@ function Navigation() {
   ];
 
   return (
-    <nav className="flex items-center gap-6">
+    <nav className="flex flex-col md:flex-row gap-6">
       {navigationItems.map((item) => (
         <NavItem key={item.path} label={item.label} path={item.path} />
       ))}
