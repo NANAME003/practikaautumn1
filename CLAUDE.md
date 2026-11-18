@@ -21,19 +21,28 @@
 
 ## О проекте
 
-Интернет-магазин (учебный) на React.
+Сайт сервисного центра по ремонту и обслуживанию техники «ТехноСервис» (учебный проект).
+Функционал: виды техники, услуги, заявки, статус ремонта.
+
+**Делаем поэтапно, на каждом шаге реализуем только текущий этап**, остальное остаётся заглушками (`StubPage`):
+1. Ребрендинг и главная (готово)
+2. Каталог услуг (готово)
+3. Форма заявки
+4. Статус ремонта
+5. Бэкенд на json-server (сохранение заявок, админка)
 
 - **React 19** + **Vite**, точка входа `src/main.tsx`, роутинг в `src/App.tsx` (`react-router`)
 - **Tailwind CSS** для стилей
-- **json-server** как простой бэкенд с данными о товарах (`products.json`)
+- Данные услуг: `public/services.json` (загружается через `fetch`)
 - Код компонентов в основном `.jsx`, корневые файлы `.tsx`
 
 ### Структура `src/`
 
-- `components/`: части интерфейса (Header, Hero, Categories, Catalog, Benefits, Footer)
-- `pages/`: страницы (HomePage, ProductsPage, CartPage, LoginPage, AdminPanel)
+- `components/`: части интерфейса (Header, Hero, DeviceTypes, Catalog, Benefits, Footer)
+- `pages/`: страницы (HomePage, ServicesPage, StubPage, LoginPage, AdminPanel)
 - `layouts/`: общий шаблон страницы (шапка + подвал)
-- `hooks/`: свои хуки (например `useProducts` для загрузки товаров)
+- `hooks/`: свои хуки (`useServices` загружает услуги)
+- `data/`: справочники (`deviceTypes.js`, виды техники)
 
 ### Команды
 

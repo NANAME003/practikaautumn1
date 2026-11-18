@@ -13,7 +13,7 @@ function Hero() {
             Бесплатная диагностика, оригинальные запчасти и гарантия на работы."
       />
 
-      <HeroMedia image="/hero1.jpg" statLabel="Отремонтировано устройств" statValue="5 000+" />
+      <HeroMedia image="/electronics.jpg" statLabel="Отремонтировано устройств" statValue="5 000+" />
       </div>
     </section>
   );

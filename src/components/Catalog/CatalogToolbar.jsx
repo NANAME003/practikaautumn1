@@ -1,13 +1,12 @@
+import { Search as SearchIcon } from "lucide-react";
+
 function CatalogToolbar({ count, total, query, onQueryChange, sort, onSortChange }) {
     return (
       <div className="mb-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="relative sm:w-80">
             <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-gray-500">
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <circle cx="11" cy="11" r="7" />
-                <path strokeLinecap="round" d="m20 20-3.5-3.5" />
-              </svg>
+              <SearchIcon className="h-5 w-5" aria-hidden="true" />
             </span>
             <input
               type="search"

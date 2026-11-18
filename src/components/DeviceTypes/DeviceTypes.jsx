@@ -1,16 +1,6 @@
 import { Link } from "react-router";
-
-// Виды техники, которые ремонтирует сервисный центр.
-// Данные лежат в массиве: чтобы добавить новый вид, достаточно дописать объект.
-// На этапе 2 эти данные переедут в JSON-файл вместе с услугами.
-const deviceTypes = [
-  { id: "phones", name: "Смартфоны и планшеты", text: "Замена экрана, батареи, разъёмов, ремонт после воды" },
-  { id: "laptops", name: "Ноутбуки и ПК", text: "Чистка, замена матрицы и клавиатуры, апгрейд, установка ПО" },
-  { id: "tv", name: "Телевизоры", text: "Ремонт подсветки, блока питания, замена матрицы" },
-  { id: "large", name: "Крупная бытовая техника", text: "Стиральные и посудомоечные машины, холодильники" },
-  { id: "small", name: "Мелкая бытовая техника", text: "Кофемашины, пылесосы, микроволновки" },
-  { id: "consoles", name: "Игровые приставки", text: "Чистка, замена термопасты, ремонт геймпадов" },
-];
+import deviceTypes from "../../data/deviceTypes.js";
+import DeviceIcon from "./DeviceIcon.jsx";
 
 function DeviceTypes() {
   return (
@@ -34,13 +24,17 @@ function DeviceTypes() {
           {deviceTypes.map((device) => (
             <Link
               key={device.id}
-              to="/services"
+              to={`/services?type=${device.id}`}
               className="group rounded-xl border border-gray-200 bg-white p-5 transition-colors hover:border-emerald-900"
             >
-              <div className="flex items-center justify-between">
-                <h3 className="text-base font-medium text-gray-900">{device.name}</h3>
+              <div className="flex items-start justify-between">
+                {/* Цветная плашка с иконкой */}
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-50 text-emerald-900 transition-colors group-hover:bg-emerald-900 group-hover:text-white">
+                  <DeviceIcon type={device.id} className="h-8 w-8" />
+                </div>
                 <span className="text-gray-400 transition-transform group-hover:translate-x-1">→</span>
               </div>
+              <h3 className="mt-4 text-base font-medium text-gray-900">{device.name}</h3>
               <p className="mt-2 text-sm leading-6 text-gray-500">{device.text}</p>
             </Link>
           ))}

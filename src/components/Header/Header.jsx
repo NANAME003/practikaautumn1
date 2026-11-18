@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Menu } from "lucide-react";
 import Navigation from "./Navigation.jsx";
 import HeaderActions from "./HeaderAction.jsx";
 import Brand from "./Brands.jsx";
@@ -28,14 +29,7 @@ function Header() {
             className="inline-flex h-10 w-10 items-center justify-center rounded-lg hover:bg-gray-100 md:hidden"
           >
             <span className="sr-only">Открыть меню</span>
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24">
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeWidth="2"
-                d="M5 7h14M5 12h14M5 17h14"
-              />
-            </svg>
+            <Menu className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
       </div>
