@@ -1,23 +1,19 @@
 import PopularCategories from "./PopularCategories";
+import useProducts from "../../hooks/useProducts.jsx";
 import {useRef} from "react";
+
 
 function PopularItems(){
     const listRef = useRef(null);
+    const{products, loading, error}= useProducts();
+
+    
     const popularItems = [
         {name: "Дом", image:"/home.jpg", path:"/products?category=home"},
         {name: "Электроника", image:"/electronics.jpg", path:"/products?category=electronics"},
         {name: "Одежда", image:"/clothes.jpg", path:"/products?category=clothes"},
         {name: "Спорт", image:"/sport.jpg", path:"/products?category=sport"},
     ];
-
-    const products = [
-        {id: 1, category:"Спорт", name:"Коврик для йоги", price: 2900,image:"/yoga.jpg"},
-        {id: 2, category:"Спорт", name:"Кроссовки Flash", price: 5000,image:"/sneakers.jpg"},
-        {id: 3, category:"Дом", name:"Ваза", price: 500,image:"/vase.jpg"},
-        {id: 4, category:"Дом", name:"Настольная лампа",price: 1268,image:"/lamp.jpg"},
-        {id: 5, category:"Электроника", name:"Наушники", price: 3000,image:"/headphones.png"},
-        {id: 6, category:"Электроника", name:"Смартфон", price: 15000,image:"/smartphone.jpeg"},
-    ]
 
     return(
         <>
@@ -81,7 +77,9 @@ function PopularItems(){
     </div>
 
     <div ref={listRef} className="mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4">
-      {products.map((item) => (
+      {loading && <p className="text-gray-500">Загрузка</p>}
+      {error  && <p className="text-red-700"> Не удалось загрузить товары. {error}</p>}
+      {!loading && !error && products.map((item) => (
         <div key={item.id} className="w-64 shrink-0 snap-start">
           <img
             src={item.image}

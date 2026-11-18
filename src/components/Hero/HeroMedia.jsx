@@ -1,12 +1,12 @@
 import ProductCounter from "./ProductCounter.jsx";
 
-function HeroMedia({ image, productCount }) {
+function HeroMedia({ image, statLabel, statValue }) {
   return (
     <div className="relative">
-      <img src={image} alt="Покупатель с товарами"
+      <img src={image} alt="Мастер сервисного центра"
       className="h-[380px] w-full rounded-2xl object-cover" />
 
-      <ProductCounter count={productCount} />
+      <ProductCounter label={statLabel} value={statValue} />
     </div>
   );
 }

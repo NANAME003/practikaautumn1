@@ -13,7 +13,7 @@ function Search({className=""}) {
       </svg>
       <input
         type="search"
-        placeholder="Поиск товаров"
+        placeholder="Поиск услуг"
         className="w-full rounded-lg border border-gray-200 bg-white py-2 pl-9 pr-4 text-sm text-gray-800 outline-none placeholder:text-gray-400 focus:border-gray-400"
       />
     </div>

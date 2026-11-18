@@ -5,27 +5,24 @@ function Footer() {
  
   
     const columns=[
-      {title:"каталог",
+      {title:"Услуги",
         links:[
-          {label:"Все товары", path:"/products"},
-          {label:"Новинки", path:"/products?sort=new"},
-          {label:"Скидки", path:"/products?sale=1"}
+          {label:"Все услуги", path:"/services"},
+          {label:"Виды техники", path:"/"},
         ]
       },
-      {title:"Покупателям",
+      {title:"Клиентам",
         links:[
-          {label:"Корзина", path:"/cart"},
-          {label:"Вход", path:"/login"},
-          {label:"Регистрация", path:"/register"}
+          {label:"Оставить заявку", path:"/request"},
+          {label:"Статус ремонта", path:"/status"},
+          {label:"Вход", path:"/login"}
         ]
       },
       {
-        title:"Магазин",
-  
+        title:"Сервисный центр",
+
         links:[
         {label:"Админ-панель", path:"/admin"},
-        {label:"Управление товарами", path:"/admin/products"},
-        {label:"Категории", path:"/admin/categories"}
         ]
       }
     ];
@@ -37,10 +34,13 @@ function Footer() {
           <div className="mx-auto max-w-6xl px-6">
               <div className="grid gap-10 py-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
                 <div>
-                  <Brand name="Витрина" />
+                  <Brand name="ТехноСервис" />
                   <p className="mt-4 max-w-xs text-sm leading-6 text-gray-500">
-                    Учебный интернет-магазин: витрина, корзина и админ панель с CRUD на React.
+                    Сервисный центр по ремонту и обслуживанию техники.
                   </p>
+                  <p className="mt-3 text-sm text-gray-600">+7 (900) 000-00-00</p>
+                  <p className="text-sm text-gray-600">г. Москва, ул. Примерная, 1</p>
+                  <p className="text-sm text-gray-600">Пн–Сб: 10:00–20:00</p>
                 </div>
                 {columns.map((column) =>(
                   <div key={column.title}>
@@ -58,7 +58,7 @@ function Footer() {
                 ))}
                 </div>
                 <div className="flex flex-col gap-2 border-t border-gray-200 py-6 text-xs text-gray-400 md:flex-row md:justify-between">
-                  <p>© 2026 Витрина. Учебный проект.</p>
+                  <p>© 2026 ТехноСервис. Учебный проект.</p>
                   <p> Дизайн-система: React,Tailwind CSS, React Router</p>
                 </div>
             </div>

@@ -1,5 +1,7 @@
+import {Link} from "react-router";
 function AccountAction() {
   return (
+    <Link to="/login">
     <button
       type="button"
       className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100"
@@ -10,6 +12,7 @@ function AccountAction() {
       </svg>
       <span className="hidden md:inline">Войти</span>
     </button>
+    </Link>
   );
 }
 

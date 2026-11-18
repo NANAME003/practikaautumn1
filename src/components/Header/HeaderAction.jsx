@@ -1,5 +1,5 @@
 import AccountAction from "./AccountAction";
-import CartAction from "./CartAction";
+import RequestAction from "./RequestAction.jsx";
 import Search from "./Search.jsx";
 
 function HeaderActions() {
@@ -7,7 +7,7 @@ function HeaderActions() {
     <div className="flex items-center gap-4">
       <Search className="hidden w-64 md:block" />
       <AccountAction />
-      <CartAction count={0} />
+      <RequestAction />
       
     </div>
     

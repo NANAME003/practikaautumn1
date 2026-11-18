@@ -7,8 +7,16 @@ function Navigation() {
       path: "/",
     },
     {
-      label: "Товары",
-      path: "/products",
+      label: "Услуги",
+      path: "/services",
+    },
+    {
+      label: "Заявка",
+      path: "/request",
+    },
+    {
+      label: "Статус ремонта",
+      path: "/status",
     },
   ];
 
