@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router";
+import {SlidersHorizontal} from "lucide-react";
 import FilterPanel from "../components/Catalog/FilterPanel.jsx";
 import ServiceGrid from "../components/Catalog/ServiceGrid.jsx";
 import CatalogToolbar from "../components/Catalog/CatalogToolbar.jsx";
@@ -19,13 +20,13 @@ function getInitialType(searchParams) {
 function ServicesPage() {
   const [searchParams] = useSearchParams();
   const { services, loading, error } = useServices();
-
   const [deviceType, setDeviceType] = useState(getInitialType(searchParams));
   const [maxPrice, setMaxPrice] = useState(PRICE_LIMIT);
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("name");
+  const [showFilters, setShowFilters]= useState(false);
 
-  // 1) фильтруем: вид техники + цена + поиск по названию
+  
   const filtered = services.filter(
     (s) =>
       (deviceType === "" || s.deviceType === deviceType) &&
@@ -33,10 +34,11 @@ function ServicesPage() {
       s.name.toLowerCase().includes(query.trim().toLowerCase())
   );
 
-  // 2) сортируем копию массива ([...filtered]), чтобы не менять исходный
+  
   const sorted = [...filtered].sort((a, b) => {
     if (sort === "price-asc") return a.price - b.price;
     if (sort === "price-desc") return b.price - a.price;
+
     return a.name.localeCompare(b.name, "ru");
   });
 
@@ -48,9 +50,9 @@ function ServicesPage() {
   }
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-10">
+    <section className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
       <p className="text-sm text-gray-500">Каталог</p>
-      <h1 className="text-3xl font-bold">Услуги сервисного центра</h1>
+      <h1 className="text-2xl font-bold sm:text-3xl">Услуги сервисного центра</h1>
 
       {loading && <p className="mt-6 text-gray-500">Загрузка...</p>}
       {error && (
@@ -60,7 +62,12 @@ function ServicesPage() {
       )}
 
       {!loading && !error && (
-        <div className="mt-8 grid gap-8 md:grid-cols-[260px_1fr]">
+        <div className="mt-6 grid gap-6 sm:mt-8 lg:grid-cols-[260px_1fr] lg:gap-8">
+          <button type="button" onClick={() => setShowFilters(!showFilters)} className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 lg:hidden">
+            <SlidersHorizontal className="h-4 w-4" />
+            {showFilters ? "Скрыть фильтры" : "Показать фильтры"}
+            </button>
+            <div className={showFilters ? "block":"hidden lg:block"}>
           <FilterPanel
             options={deviceTypes}
             selected={deviceType}
@@ -70,7 +77,9 @@ function ServicesPage() {
             priceLimit={PRICE_LIMIT}
             onReset={reset}
           />
+          </div>
           <div>
+            
             <CatalogToolbar
               count={filtered.length}
               total={services.length}

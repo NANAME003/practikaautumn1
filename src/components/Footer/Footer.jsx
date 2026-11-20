@@ -39,8 +39,8 @@ function Footer() {
                     Сервисный центр по ремонту и обслуживанию техники.
                   </p>
                   <p className="mt-3 text-sm text-gray-600">+7 (900) 000-00-00</p>
-                  <p className="text-sm text-gray-600">г. Москва, ул. Примерная, 1</p>
-                  <p className="text-sm text-gray-600">Пн–Сб: 10:00–20:00</p>
+                  <p className="text-sm text-gray-600">г. Тирасполь, ул. Одесская 1</p>
+                  <p className="text-sm text-gray-600">Пн–Пт: 14:00–18:00</p>
                 </div>
                 {columns.map((column) =>(
                   <div key={column.title}>

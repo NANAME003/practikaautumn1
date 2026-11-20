@@ -16,7 +16,7 @@ function ServiceCard({ id, name, price, duration, description, deviceType, devic
       <h3 className="mt-3 text-base font-medium text-gray-900">{name}</h3>
       <p className="mt-2 text-sm leading-6 text-gray-500">{description}</p>
 
-      <div className="mt-auto flex items-center justify-between pt-4">
+      <div className="mt-auto flex  flex-wrap items-center justify-between gap-2 pt-4">
         <span className="text-base font-medium text-gray-900">
           от {price.toLocaleString("ru-RU")} ₽
         </span>

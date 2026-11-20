@@ -6,22 +6,29 @@ import AdminPanel from "./pages/AdminPanel.jsx";
 import CartPage from "./pages/CartPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import StubPage from "./pages/StubPage.jsx";
+import AdminLayout from "./layouts/AdminLayout.jsx";
+import AdminDeviceTypes from "./pages/AdminDeviceTypes.jsx";
 
 
 function App() {
   return (
-    <Layout>
-      <Routes>
+    <Routes>
+      <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/services" element={<ServicesPage />} />
-        {/* Разделы, которые будут сделаны на этапах 3–4 */}
         <Route path="/request" element={<StubPage title="Заявка на ремонт" stage={3} />} />
         <Route path="/status" element={<StubPage title="Статус ремонта" stage={4} />} />
-        <Route path="/admin" element={<AdminPanel />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/login" element={<LoginPage />} />
+      </Route>
+
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<AdminPanel />} />
+         <Route path="requests" element={<StubPage title="Заявки" stage={5} />} />
+         <Route path="services" element={<StubPage title="Услуги" stage={5} />} />
+         <Route path="devices" element={<AdminDeviceTypes />} />
+      </Route>
       </Routes>
-    </Layout>
   );
 }
 
