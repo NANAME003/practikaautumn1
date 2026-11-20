@@ -1,7 +1,7 @@
 import DeviceIcon from "../DeviceTypes/DeviceIcon.jsx";
 import RowActions from "./RowActions.jsx";
 
-function DeviceTypesTable ({items}) {
+function DeviceTypesTable ({items, onEdit, onDelete}) {
     return (
         <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
             <table className="w-full min-w-[640px] text-left text-sm">
@@ -26,7 +26,12 @@ function DeviceTypesTable ({items}) {
                             </td>
                             <td className="px-5 py-3 font-mono text-xs text-gray-500">{item.id}</td>
                             <td className="px-5 py-3 text-gray-500">{item.text}</td>
-                            <td className="px-5 py-3"><RowActions name={item.name} /> </td>
+                            <td className="px-5 py-3">
+                                <RowActions 
+                                name={item.name} 
+                                onEdit={() =>onEdit(item)} 
+                                onDelete={() => onDelete(item)} /> 
+                            </td>
                         </tr>
                     ))}
                 </tbody>

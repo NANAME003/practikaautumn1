@@ -1,4 +1,4 @@
-import { Smartphone, Laptop, Tv, WashingMachine, Microwave, Gamepad2 } from "lucide-react";
+import { Smartphone, Laptop, Tv, WashingMachine, Microwave, Gamepad2, Wrench } from "lucide-react";
 
 
 const ICONS = {
@@ -12,8 +12,7 @@ const ICONS = {
 
 
 function DeviceIcon({ type, className = "h-6 w-6" }) {
-  const Icon = ICONS[type];
-  if (!Icon) return null; 
+  const Icon = ICONS[type] ?? Wrench;
 
   return <Icon className={className} strokeWidth={1.6} aria-hidden="true" />;
 }

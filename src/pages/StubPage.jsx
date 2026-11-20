@@ -1,7 +1,6 @@
 import { Link } from "react-router";
 
-// Универсальная заглушка для разделов, которые будут сделаны на следующих этапах.
-// title — название раздела, stage — номер этапа, на котором он появится.
+
 function StubPage({ title, stage }) {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 text-center">

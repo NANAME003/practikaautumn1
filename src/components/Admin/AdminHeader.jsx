@@ -10,10 +10,10 @@ function AdminHeader () {
     return (
         <header className=" flex h-16 items-center justify-between border-b border-gray-200 px-6">
             <div className="flex items-center gap-3">
-                <a className="flex items-center gap-2.5" href="/admin"> 
+                <Link className="flex items-center gap-2.5" to="/admin"> 
                 <Brand name="ТехноСервис" />
                 <span className="rounded-md bg-stone-100 px-2 py-0.5 text-sm text-gray-500">Админ</span>
-                </a>
+                </Link>
             </div>
             
 

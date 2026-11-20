@@ -23,7 +23,7 @@ function AdminSidebar() {
                 })}
             </nav>
             <p className=" mt-auto px-3 pb-2 text-xs leading-5 text-emerald-900/70">
-            Учебный  проект управление заявками и услугами
+            Учебный проект · управление заявками и услугами
             </p>
         </aside>
     );
