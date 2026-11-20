@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {Plus} from "lucide-react";
 import AdminPageHeader from "../components/Admin/AdminPageHeader";
 import DeviceTypesTable from "../components/Admin/DeviceTypesTable";
 import DeviceTypeForm from "../components/Admin/DeviceTypeForm";
-import deviceTypes from "../data/deviceTypes.js";
 
+const API_URL = "http://localhost:3001/deviceTypes";
 
 function AdminDeviceTypes() {
-    const [items, setItems] = useState(deviceTypes);
+    const [items, setItems] = useState([]);
     const [editing, setEditing] = useState(null);
+    const [error,setError] = useState("");
+
+    useEffect(() => {
+        fetch(API_URL)
+        .then((res) => {
+            if (!res.ok) throw new Error("Ошибка загрузки");
+            return res.json();
+        })
+        .then((data) => setItems(data))
+        .catch(() => setError("Не удалось загрузить виды техники."));
+    },[]);
 
     function handleAdd() {
         setEditing({ id: "",name:"", text:""});
@@ -18,19 +29,34 @@ function AdminDeviceTypes() {
         setEditing(item);
     }
 
-    function handleDelete(item){
+    async function handleDelete(item){
         if (!window.confirm(`Удалить «${item.name}»?`)) return;
+        try {
+            const res= await fetch(`${API_URL}/${item.id}`, {method: "DELETE"});
+            if (!res.ok) throw new Error();
         setItems(items.filter((i) => i.id !== item.id));
+        } catch {
+            setError("Не удалось удалить запись");
+        }
     }
 
-    function handleSave(data) {
-        if (editing.id === "") {
-            const newItem = {id: `type-${Date.now()}`, ...data };
-            setItems([...items, newItem]);
-        } else {
-            setItems(items.map((i) => (i.id === editing.id ? {...i, ...data } :i)));
+    async function handleSave(data) {
+        const isNew = editing.id === "";
+        try {
+            const res = await fetch(isNew ? API_URL : `${API_URL}/${editing.id}`,{
+                method : isNew ? "POST" : "PATCH",
+                headers: {"Content-Type" : "application/json"},
+                body: JSON.stringify(data),
+            });
+            if (!res.ok) throw new Error();
+            const saved = await res.json();
+            setItems(isNew 
+                ? [...items, saved]
+                : items.map((i) => (i.id === saved.id ? saved : i )));
+            setEditing(null);
+        } catch {
+            setError("Не удалось сохранить запись");
         }
-        setEditing(null);
     }
 
     return(
@@ -48,7 +74,7 @@ function AdminDeviceTypes() {
                 onSave={handleSave}
                 onCancel={() => setEditing(null)} />
             )}
-
+            {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
             <p className=" mb-4 text-sm text-gray-500"> Всего: {items.length}</p>
             <DeviceTypesTable items={items}  onEdit={handleEdit} onDelete={handleDelete} />
         </section>

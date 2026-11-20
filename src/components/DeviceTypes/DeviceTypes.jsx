@@ -1,8 +1,9 @@
 import { Link } from "react-router";
-import deviceTypes from "../../data/deviceTypes.js";
+import useDeviceTypes from "../../hooks/useDeviceTypes.jsx";
 import DeviceIcon from "./DeviceIcon.jsx";
 
 function DeviceTypes() {
+  const {deviceTypes, loading,error} = useDeviceTypes();
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-6xl px-6 py-12">
@@ -20,6 +21,8 @@ function DeviceTypes() {
           </Link>
         </div>
 
+        {loading && <p className="mt-8 text-gray-500">Загрузка...</p>}
+        {error && <p className="mt-8 text-sm text-red-600">Не удалось загрузить виды техники: {error} </p>}
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {deviceTypes.map((device) => (
             <Link

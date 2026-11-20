@@ -1,13 +1,13 @@
 import ServiceCard from "./ServiceCard.jsx";
-import deviceTypes from "../../data/deviceTypes.js";
+
 
 // Находит название вида техники по его id ("phones" → "Смартфоны и планшеты")
-function getDeviceTypeName(id) {
+function getDeviceTypeName(deviceTypes, id) {
     const found = deviceTypes.find((type) => type.id === id);
     return found ? found.name : "";
 }
 
-function ServiceGrid({ items, onReset }) {
+function ServiceGrid({ items, onReset, deviceTypes }) {
     if (items.length === 0) {
         return (
             <div className="rounded-2xl border border-dashed border-gray-300 p-10 text-center">
@@ -25,10 +25,12 @@ function ServiceGrid({ items, onReset }) {
                 <ServiceCard
                     key={item.id}
                     {...item}
-                    deviceTypeName={getDeviceTypeName(item.deviceType)}
+                    deviceTypeName={getDeviceTypeName(deviceTypes,item.deviceType)}
                 />
             ))}
+            
         </div>
+        
     );
 }
 

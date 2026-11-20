@@ -5,31 +5,26 @@ import FilterPanel from "../components/Catalog/FilterPanel.jsx";
 import ServiceGrid from "../components/Catalog/ServiceGrid.jsx";
 import CatalogToolbar from "../components/Catalog/CatalogToolbar.jsx";
 import useServices from "../hooks/useServices.jsx";
-import deviceTypes from "../data/deviceTypes.js";
+import useDeviceTypes from "../hooks/useDeviceTypes.jsx";
 
 const PRICE_LIMIT = 5000;
 
-// Берёт вид техники из адреса (/services?type=phones).
-// Если такого вида нет в справочнике, показываем все услуги.
-function getInitialType(searchParams) {
-  const type = searchParams.get("type") ?? "";
-  const exists = deviceTypes.some((item) => item.id === type);
-  return exists ? type : "";
-}
 
 function ServicesPage() {
   const [searchParams] = useSearchParams();
-  const { services, loading, error } = useServices();
-  const [deviceType, setDeviceType] = useState(getInitialType(searchParams));
+  const {services, loading, error } = useServices();
+  const {deviceTypes, loading: typesLoading, error:typesError} = useDeviceTypes();
+  const [deviceType, setDeviceType] = useState(searchParams.get("type") ?? "");
   const [maxPrice, setMaxPrice] = useState(PRICE_LIMIT);
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("name");
   const [showFilters, setShowFilters]= useState(false);
+  const activeType = deviceTypes.some((t) => t.id === deviceType) ? deviceType : "";
 
   
   const filtered = services.filter(
     (s) =>
-      (deviceType === "" || s.deviceType === deviceType) &&
+      (activeType === "" || s.deviceType === activeType) &&
       s.price <= maxPrice &&
       s.name.toLowerCase().includes(query.trim().toLowerCase())
   );
@@ -54,14 +49,14 @@ function ServicesPage() {
       <p className="text-sm text-gray-500">Каталог</p>
       <h1 className="text-2xl font-bold sm:text-3xl">Услуги сервисного центра</h1>
 
-      {loading && <p className="mt-6 text-gray-500">Загрузка...</p>}
-      {error && (
+      {(loading || typesLoading) && <p className="mt-6 text-gray-500">Загрузка...</p>}
+      {(error || typesError) && (
         <p className="mt-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-          Не удалось загрузить услуги: {error}
+          Не удалось загрузить услуги: {error || typesError}
         </p>
       )}
 
-      {!loading && !error && (
+      {!loading && !typesLoading && !error && !typesError && (
         <div className="mt-6 grid gap-6 sm:mt-8 lg:grid-cols-[260px_1fr] lg:gap-8">
           <button type="button" onClick={() => setShowFilters(!showFilters)} className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 lg:hidden">
             <SlidersHorizontal className="h-4 w-4" />
@@ -70,7 +65,7 @@ function ServicesPage() {
             <div className={showFilters ? "block":"hidden lg:block"}>
           <FilterPanel
             options={deviceTypes}
-            selected={deviceType}
+            selected={activeType}
             onSelectedChange={setDeviceType}
             maxPrice={maxPrice}
             onMaxPriceChange={setMaxPrice}
@@ -88,7 +83,7 @@ function ServicesPage() {
               sort={sort}
               onSortChange={setSort}
             />
-            <ServiceGrid items={sorted} onReset={reset} />
+            <ServiceGrid items={sorted} deviceTypes={deviceTypes} onReset={reset} />
           </div>
         </div>
       )}
