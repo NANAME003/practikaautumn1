@@ -1,4 +1,4 @@
-import {ClipboardList, Clock, Wrench, CircleCheck, Smartphone,Banknote} from "lucide-react";
+import {ClipboardList, Clock, Wrench, CircleCheck, Smartphone,Banknote, Coins, Receipt, Percent,Star} from "lucide-react";
 import AdminPageHeader from "../components/Admin/AdminPageHeader.jsx";
 import StatCard from "../components/Admin/StatCard.jsx";
 import ChartCard from "../components/Admin/ChartCard.jsx";
@@ -8,6 +8,7 @@ import BarChart from "../components/Admin/BarChart.jsx";
 import useRequests from "../hooks/useRequests.jsx";
 import useServices from "../hooks/useServices.jsx";
 import useDeviceTypes from "../hooks/useDeviceTypes.jsx";
+import RecentRequests from "../components/Admin/RecentRequests.jsx";
 
 function AdminDashboard() {
     const {requests, loading, error} = useRequests();
@@ -55,6 +56,32 @@ function AdminDashboard() {
         };
     });
 
+    const recentRequests = [...requests]
+    .sort((a,b) => b.createdAt.localeCompare(a.createdAt) || b.id.localeCompare(a.id))
+    .slice(0,5);
+
+    const getRequestPrice = (request) => {
+        const service = services.find((s) => s.id === request.serviceId);
+        return service ? service.price : 0;
+    };
+
+    const revenue = requests
+    .filter((r) => r.status === "done")
+    .reduce ((sum,r) => sum + getRequestPrice(r), 0);
+
+    const averageCheck = doneCount > 0 ? Math.round(revenue / doneCount) : 0;
+
+    const donePercent = requests.length > 0
+    ? Math.round((doneCount / requests.length) * 100)
+    : 0;
+
+    const popularService = services
+    .map((s) => ({
+        name: s.name,
+        count: requests.filter((r) => r.serviceId === s.id).length,
+    }))
+    .reduce((best, item) => (item.count > best.count ? item : best), {name: "—", count: 0 });
+
     return (
         <section>
             <AdminPageHeader label ="Обзор" title="Dashboard" />
@@ -90,11 +117,23 @@ function AdminDashboard() {
                     <BarChart items={byDeviceType} />    
                 </ChartCard>
                 <ChartCard title="Средняя цена по видам техники" hint="по услугам каталога">
-                    <BarChart items={priceByDeviceType} suffix=" P" />    
+                    <BarChart items={priceByDeviceType} suffix=" ₽" />    
                 </ChartCard>    
                 
                 </div> 
 
+                <h2 className="mb-3 mt-8 text-sm font-medium text-gray-500">Дополнительно</h2>
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                    <StatCard icon={Coins} label="Выручка" value={`${revenue.toLocaleString("ru-RU")} ₽`} hint="по выполненным заявкам" />
+                    <StatCard icon={Receipt} label="Средний чек" value={`${averageCheck.toLocaleString("ru-RU")} ₽`} hint="на одну выполненную заявку" color="bg-sky-50 text-sky-700" />
+                    <StatCard icon={Percent} label="Выполнено" value={`${donePercent}%`} hint="от всех заявок" />
+                    <StatCard icon={Star} label="Популярная услуга" value={popularService.count} hint={popularService.name} color="bg-amber-50 text-amber-700" />
+                </div>
+
+                <h2 className="mb-3 mt-8 text-sm font-medium text-gray-500">Последние заявки</h2>
+                <ChartCard title="Последние заявки" hint="5 самых свежих заявок">
+                    <RecentRequests requests={recentRequests} services={services} deviceTypes={deviceTypes} />
+                </ChartCard>
                 </>
             )}
         </section>

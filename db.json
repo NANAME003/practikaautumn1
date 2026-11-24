@@ -33,7 +33,7 @@
   ],
 
   "requests": [
-    {"id": "1001","clienName": "Иван петров ","phone": "+373 777 12345","deviceTypes": "phones","serviceId": 1, "problems": "разбит экран после падения","status": "done", "createdAt": "2026-11-17"},
+    {"id": "1001","clientName": "Иван Петров","phone": "+373 777 12345","deviceType": "phones","serviceId": 1, "problem": "Разбит экран после падения","status": "done", "createdAt": "2026-11-17"},
     { "id": "1002", "clientName": "Анна Ковальчук", "phone": "+373 778 23456", "deviceType": "laptops", "serviceId": 5, "problem": "Сильно греется и шумит", "status": "done", "createdAt": "2026-11-18" },
     { "id": "1003", "clientName": "Сергей Мунтян", "phone": "+373 779 34567", "deviceType": "tv", "serviceId": 9, "problem": "Нет подсветки, звук есть", "status": "in_progress", "createdAt": "2026-11-19" },
     { "id": "1004", "clientName": "Мария Руссу", "phone": "+373 775 45678", "deviceType": "large", "serviceId": 11, "problem": "Стиральная машина не сливает воду", "status": "in_progress", "createdAt": "2026-11-20" },
