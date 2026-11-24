@@ -2,7 +2,7 @@ import Layout from "./layouts/layouts.jsx";
 import HomePage from "./pages/HomePage";
 import {Routes,Route} from "react-router";
 import ServicesPage from "./pages/ServicesPage.jsx";
-import AdminPanel from "./pages/AdminPanel.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 import CartPage from "./pages/CartPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import StubPage from "./pages/StubPage.jsx";
@@ -23,7 +23,7 @@ function App() {
       </Route>
 
       <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<AdminPanel />} />
+        <Route index element={<AdminDashboard />} />
          <Route path="requests" element={<StubPage title="Заявки" stage={5} />} />
          <Route path="services" element={<StubPage title="Услуги" stage={5} />} />
          <Route path="devices" element={<AdminDeviceTypes />} />

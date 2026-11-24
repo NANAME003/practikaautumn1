@@ -31,5 +31,19 @@
       "text": "Чистка, замена термопасты, ремонт геймпадов"
     }
   ],
+
+  "requests": [
+    {"id": "1001","clienName": "Иван петров ","phone": "+373 777 12345","deviceTypes": "phones","serviceId": 1, "problems": "разбит экран после падения","status": "done", "createdAt": "2026-11-17"},
+    { "id": "1002", "clientName": "Анна Ковальчук", "phone": "+373 778 23456", "deviceType": "laptops", "serviceId": 5, "problem": "Сильно греется и шумит", "status": "done", "createdAt": "2026-11-18" },
+    { "id": "1003", "clientName": "Сергей Мунтян", "phone": "+373 779 34567", "deviceType": "tv", "serviceId": 9, "problem": "Нет подсветки, звук есть", "status": "in_progress", "createdAt": "2026-11-19" },
+    { "id": "1004", "clientName": "Мария Руссу", "phone": "+373 775 45678", "deviceType": "large", "serviceId": 11, "problem": "Стиральная машина не сливает воду", "status": "in_progress", "createdAt": "2026-11-20" },
+    { "id": "1005", "clientName": "Дмитрий Захаров", "phone": "+373 777 56789", "deviceType": "phones", "serviceId": 2, "problem": "Быстро садится батарея", "status": "new", "createdAt": "2026-11-21" },
+    { "id": "1006", "clientName": "Елена Бондарь", "phone": "+373 778 67890", "deviceType": "consoles", "serviceId": 15, "problem": "Приставка выключается во время игры", "status": "new", "createdAt": "2026-11-22" },
+    { "id": "1007", "clientName": "Олег Сырбу", "phone": "+373 779 78901", "deviceType": "small", "serviceId": 13, "problem": "Кофемашина не греет воду", "status": "new", "createdAt": "2026-11-23" },
+    { "id": "1008", "clientName": "Наталья Гуцу", "phone": "+373 775 89012", "deviceType": "laptops", "serviceId": 7, "problem": "Не загружается Windows", "status": "done", "createdAt": "2026-11-23" }
+  ],
+
   "$schema": "./node_modules/json-server/schema.json"
+
+ 
 }
